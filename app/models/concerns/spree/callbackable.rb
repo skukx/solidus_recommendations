@@ -15,14 +15,14 @@ module Spree
       # Index document into elasticsearch
       #
       def index_document
-        __elasticsearch__.index_document(version_options)
+        __elasticsearch__.index_document
       end
 
       ##
       # Updates elasticsearch document from featured model
       #
       def update_document
-        __elasticsearch__.update_document(version_options)
+        __elasticsearch__.update_document
       end
 
       private
