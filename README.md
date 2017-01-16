@@ -19,6 +19,24 @@ bundle
 bundle exec rails g solidus_recommendations:install
 ```
 
+Usage
+-----
+
+We can get recommendations based on the product `123` by doing the following:
+```ruby
+Spree::Product.recommendations.get(123)
+```
+
+The query defaults to at most 10 results, If you want more or less then you can use the `size` argument.
+```ruby
+Spree::Product.recommendations.get(123, size: 5) # At most 5 results.
+```
+
+(Experimental) Currently we index the products a user has purchased as well as the products within each order. These two indices can say different things about our data.  The user index gives results for "What did other users purchase that also purchased this product". The order index is for "What did other users checkout with that also checked out with this product". By default the user index is used to query for recommendations but that can be changed using the `index` argument. Acceptable values are `[:user, :order]`.
+```ruby
+Spree::Product.recommendations.get(123, index: :order)
+```
+
 Testing
 -------
 
