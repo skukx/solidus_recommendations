@@ -19,6 +19,15 @@ bundle
 bundle exec rails g solidus_recommendations:install
 ```
 
+From the console:
+```ruby
+Spree.user_class.__elasticsearch__.create_index!
+Spree::Order.__elasticsearch__.create_index!
+
+Spree.user_class.import
+Spree::Order.import
+```
+
 Usage
 -----
 
