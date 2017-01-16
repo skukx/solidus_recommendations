@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
-  s.add_dependency 'solidus_core'
+  s.add_runtime_dependency 'solidus_core'
+  s.add_runtime_dependency 'elasticsearch-model'
 
   # Auto-Generated dependencies
   s.add_development_dependency 'capybara'
@@ -26,8 +27,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_girl'
   s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec-its'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rubocop-rspec'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'pry'
+  s.add_development_dependency 'elasticsearch-extensions'
 end

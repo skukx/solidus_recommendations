@@ -16,8 +16,15 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 
 require 'rspec/rails'
+require 'rspec/its'
 require 'database_cleaner'
 require 'ffaker'
+require 'pry'
+
+##
+# Required for elasticsearch test cluster
+#
+require 'elasticsearch/extensions/test/cluster'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -64,6 +71,20 @@ RSpec.configure do |config|
   # to cleanup after each test instead.  Without transactional fixtures set to false the records created
   # to setup a test will be unavailable to the browser, which runs under a separate server instance.
   config.use_transactional_fixtures = false
+
+  ##
+  # Start and Stop elasticsearch clusters
+  #
+  config.before :each, elasticsearch: true do
+    Elasticsearch::Extensions::Test::Cluster.start(port: 9200) unless Elasticsearch::Extensions::Test::Cluster.running?
+  end
+
+  config.after :suite do
+    Elasticsearch::Extensions::Test::Cluster.stop(port: 9200) if Elasticsearch::Extensions::Test::Cluster.running?
+  end
+  #
+  # End of elasticsearch config
+  ##
 
   # Ensure Suite is set to use transactions for speed.
   config.before :suite do

@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'solidus', github: 'solidusio/solidus'
-# Provides basic authentication functionality for testing parts of your engine
 gem 'solidus_auth_devise'
+
+gem 'elasticsearch-extensions', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
 
 gemspec
