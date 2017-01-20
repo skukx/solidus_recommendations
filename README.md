@@ -3,6 +3,11 @@ SolidusRecommendations
 
 Uses Elasticsearch on top of Solidus framework to retrieve relevant recommendations based on what users have purchased in the past.
 
+Requirements
+------------
+
+ * Elasticsearch must be installed and running. https://www.elastic.co/downloads/elasticsearch
+
 Installation
 ------------
 
