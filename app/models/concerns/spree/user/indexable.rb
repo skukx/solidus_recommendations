@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Spree
   class User
     module Indexable
@@ -16,7 +17,7 @@ module Spree
 
       included do
         include Spree::Indexable
-        
+
         ##
         # Define Order mapping for Elasticserach index
         #
