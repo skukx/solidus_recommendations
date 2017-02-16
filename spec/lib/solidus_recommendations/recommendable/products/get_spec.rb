@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe SolidusRecommendations::Recommendable::Products do
@@ -15,8 +16,8 @@ describe SolidusRecommendations::Recommendable::Products do
     end
 
     context 'When product is nil' do
-      let (:product) { nil }
-      let (:invoked) { subject.get(product) }
+      let(:product) { nil }
+      let(:invoked) { subject.get(product) }
 
       it 'should return an empty array' do
         expect(invoked).to be_kind_of Array
@@ -25,7 +26,7 @@ describe SolidusRecommendations::Recommendable::Products do
     end
 
     context 'When product is an Object' do
-      let (:product) { create(:product) }
+      let(:product) { create(:product) }
 
       it "should use the object's id" do
         expect(subject).to receive(:user_index_significant_terms).with(product.id, anything).and_call_original

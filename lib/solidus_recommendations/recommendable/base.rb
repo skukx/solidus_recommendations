@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SolidusRecommendations
   module Recommendable
     class Base

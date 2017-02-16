@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Spree
   module Callbackable
     extend ActiveSupport::Concern
@@ -9,20 +10,25 @@ module Spree
       after_commit :update_document, on: :update
       after_commit :delete_document, on: :destroy
 
-      delegate :delete_document, to: :__elasticsearch__
-
       ##
       # Index document into elasticsearch
       #
-      def index_document
-        __elasticsearch__.index_document
-      end
+      delegate :index_document, to: :__elasticsearch__
 
       ##
       # Updates elasticsearch document from featured model
       #
       def update_document
         __elasticsearch__.update_document
+      rescue Elasticsearch::Transport::Transport::Errors::NotFound
+        Rails.logger.warn "[#{self.class}] Document with id #{id} not found on elasticsearch cluster"
+        __elasticsearch__.index_document
+      end
+
+      def delete_document
+        __elasticsearch__.delete_document
+      rescue Elasticsearch::Transport::Transport::Errors::NotFound
+        Rails.logger.warn "[#{self.class}] Document with id #{id} not found on elasticsearch cluster"
       end
 
       private
